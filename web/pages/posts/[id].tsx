@@ -1,8 +1,14 @@
 import type { InferGetStaticPropsType, GetStaticPropsContext } from 'next'
 import type { ParsedUrlQuery } from 'querystring'
 
+import Head from 'next/head'
+import Link from 'next/link'
+
 import Layout from '@components/layout'
+import Date from '@components/date'
 import { getAllPostIds, getPostData } from '@lib/posts'
+
+import utilStyles from '@styles/utils.module.css'
 
 type IParams = ParsedUrlQuery & {
   id: string
@@ -11,11 +17,14 @@ type IParams = ParsedUrlQuery & {
 const Post = ({ postData }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout>
-      {postData.title}
-      <br />
-      {postData.id}
-      <br />
-      {postData.date}
+      <Head>
+        <title>{postData.title}</title>
+      </Head>
+      <article>
+        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <div className={utilStyles.lightText}><Date dateString={postData.date} /></div>
+        <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      </article>
     </Layout>
   )
 }
@@ -30,7 +39,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const { id } = context.params as IParams
-  const postData = getPostData(id)
+  const postData = await getPostData(id)
   return {
     props: {
       postData

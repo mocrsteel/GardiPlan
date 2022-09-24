@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { remark } from 'remark'
+import html from 'remark-html'
 
 type BlogMatter = {
   title: string
@@ -24,14 +26,18 @@ export const getAllPostIds = () => {
   })
 }
 
-export const getPostData = (id: BlogData['id']) => {
+export const getPostData = async (id: BlogData['id']) => {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const matterResults = matter(fileContents)
-
+  const matterResult = matter(fileContents)
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content)
+  const contentHtml = processedContent.toString()
   return {
     id,
-    ...matterResults.data as BlogMatter
+    contentHtml,
+    ...matterResult.data as BlogMatter
   }
 }
 
