@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  mongo_db:
+    container_name: mongo-db
+    image: mongo
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+      - ./data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=testdb
+  mongoexpress:
+    container_name: mongo-express
+    image: mongo-express
+    ports:
+      - ${MONGOEXPRESS_PORT}:${MONGOEXPRESS_PORT}
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo_db
+      # - ME_CONFIG_MONGODB_PORT=${MONGODB_PORT}
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      # - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=${MONGO_ROOT_USER}
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_USER}
+      - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
+    depends_on: 
+      - mongo
+    restart: unless-stopped
+    volumes:
+      - ./data:/data/db
