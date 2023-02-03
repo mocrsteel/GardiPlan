@@ -12,6 +12,12 @@ The apps allows the plan how the garden will be organized by taking inputs on fi
 
 Make notes on different crops / produce planted, how did it grow, what were wheather conditions, diseases that occured, fertilization of the field, plowed or not etc. Make sure to weigh each harvest to allow planning how much should be planted to avoid over/under producing the crops.
 
+## Stack
+
+Database tech to be determined. Most likely PostgresQl.
+Backend will be developed in Rust.
+Frontend will be developed in NextJS.
+
 ## Future options
 
 1. Freezer stock list with out of date warnings.
