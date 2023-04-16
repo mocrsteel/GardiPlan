@@ -21,9 +21,9 @@ describe('Navigation', () => {
   it('should navigate to the login page', () => {
     cy.visit('http://localhost:3000/')
 
-    cy.get('a[href*="login"]').click()
+    cy.get('a[href*="/user/login"]').click()
 
-    cy.url().should('include', '/login')
+    cy.url().should('include', '/user/login')
     cy.get('h1').should('contain.text', 'Login')
   })
 })

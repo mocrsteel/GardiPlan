@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -28,7 +28,7 @@ export default function Home() {
             <p>Cypress will test if this link is working.</p>
           </Link>
 
-          <Link href="/login" className={styles.card}>
+          <Link href="/user/login" className={styles.card}>
             <h2>Login Page &rarr;</h2>
             <p>Cypress will test if this link is working.</p>
           </Link>

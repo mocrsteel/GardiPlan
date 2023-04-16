@@ -27,7 +27,7 @@ services:
       - ME_CONFIG_BASICAUTH_USERNAME=${MONGOEXPRESS_USER}
       - ME_CONFIG_BASICAUTH_PASSWORD=${MONGOEXPRESS_PASSWORD}
     depends_on: 
-      - mongo
+      - mongo_db
     restart: unless-stopped
     volumes:
       - ./data:/data/db

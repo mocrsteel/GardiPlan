@@ -1,0 +1,8 @@
+{
+  "userName": "randomUser",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@doe.com",
+  "password": "randomPassword",
+  "verifyPassword": "wrongPassword"
+}

@@ -1,4 +1,4 @@
-import Login from '@/pages/login'
+import Login from '@/pages/user/login'
 
 const TESTUSER: string = 'testUser'
 const TESTPASSWORD: string = 'testPassword'

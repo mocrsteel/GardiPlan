@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 type LoginForm = {
   userName: string,
@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     switch (event.currentTarget.name) {
-      case 'username':
+      case 'userName':
         updateLoginForm({
           ...loginForm,
           userName: event.currentTarget.value
@@ -36,7 +36,7 @@ const Login = () => {
         <form id={'login'}>
           <label>Username
             <input
-              name={'username'}
+              name={'userName'}
               type={'text'}
               placeholder={'Enter username'}
               value={loginForm.userName}
