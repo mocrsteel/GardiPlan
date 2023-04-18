@@ -1,17 +1,10 @@
 import React, {useState} from "react";
 import styles from '@/styles/Home.module.css'
 
-type CreateUserForm = {
-  userName: string,
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  verifyPassword: string
-}
+import type { NewUser } from '@/types/users'
 
 const CreateUser = () => {
-  const [createForm, updateCreateForm] = useState<CreateUserForm>({
+  const [createForm, updateCreateForm] = useState<NewUser>({
     userName: '',
     firstName: '',
     lastName: '',
@@ -19,39 +12,41 @@ const CreateUser = () => {
     password: '',
     verifyPassword: '',
   })
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (Object.keys(createForm).indexOf(event.currentTarget.id) !== -1) {
-      console.log(event.currentTarget.id, createForm[event.currentTarget.id])
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+    if (Object.keys(createForm).indexOf(event.currentTarget.name) !== -1) {
       updateCreateForm({
         ...createForm,
-        [event.currentTarget.id]: event.currentTarget.value
+        [event.currentTarget.name]: event.currentTarget.value
       })
     }
+  }
+  const handleSubmit = () => {
+    console.log(createForm)
   }
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1>Create a new user</h1>
-        <form id={'create-user'}>
+        <h1>Create a new user account</h1>
+        <form id={'create-user'} onSubmit={handleSubmit}>
           <label>Username
-            <input id={'userName'} type={'text'} value={createForm.userName} onChange={handleChange}/>
+            <input name={'userName'} type={'text'} value={createForm.userName} onChange={handleChange}/>
           </label>
           <label>First name
-            <input id={'firstName'} type={'text'} value={createForm.userName} onChange={handleChange}/>
+            <input name={'firstName'} type={'text'} value={createForm.firstName} onChange={handleChange}/>
           </label>
           <label>Last name
-            <input id={'lastName'} type={'text'} value={createForm.userName} onChange={handleChange}/>
+            <input name={'lastName'} type={'text'} value={createForm.lastName} onChange={handleChange}/>
           </label>
           <label>Email
-            <input id={'email'} type={'email'} value={createForm.userName} onChange={handleChange}/>
+            <input name={'email'} type={'email'} value={createForm.email} onChange={handleChange}/>
           </label>
           <label>Password
-            <input id={'password'} type={'password'} value={createForm.password} onChange={handleChange}/>
+            <input name={'password'} type={'password'} value={createForm.password} onChange={handleChange}/>
           </label>
           <label>Verify password
-            <input id={'verifyPassword'} type={'password'} value={createForm.verifyPassword} onChange={handleChange}/>
+            <input name={'verifyPassword'} type={'password'} value={createForm.verifyPassword} onChange={handleChange}/>
           </label>
-          <input type={'submit'} value={'Create'} />
+          <input title={'submit'} type={'submit'} value={'Create'}/>
         </form>
       </main>
     </div>
@@ -59,13 +54,3 @@ const CreateUser = () => {
 }
 
 export default CreateUser
-export type { CreateUserForm }
-
-describe('<CreateUser /> in-module testcode', () => {
-  it("works!", () => {
-    expect(2).to.eq(2)
-  })
-  it('also fails correctly', () => {
-    expect(2).to.eq(1)
-  })
-})

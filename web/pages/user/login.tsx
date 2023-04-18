@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 
 type LoginForm = {
@@ -50,8 +51,11 @@ const Login = () => {
               value={loginForm.password}
               onChange={handleChange}/>
           </label>
-          <input name={'submit'} type={'submit'} value={'Submit'}/>
+          <input type={'submit'} value={'Submit'}/>
         </form>
+        <Link href='/user/create'>
+          <p>Create an user account</p>
+        </Link>
       </main>
     </div>
   )

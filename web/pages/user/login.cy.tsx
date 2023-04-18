@@ -1,8 +1,5 @@
 import Login from '@/pages/user/login'
 
-const TESTUSER: string = 'testUser'
-const TESTPASSWORD: string = 'testPassword'
-
 describe('<Login />', () => {
   it('renders a Login title with an username and password form', () => {
     cy.mount(<Login />)
@@ -10,16 +7,17 @@ describe('<Login />', () => {
     cy.get('h1').should('contain.text','Login')
 
     cy.get('form#login').within(() => {
-      cy.get('input[name=username]').type(TESTUSER)
-      cy.get('input[name=username]').should('contain.value', TESTUSER)
-
-      cy.get('input[name=password]').type(TESTPASSWORD)
-
-      cy.get('input[name=password]').should('contain.value', TESTPASSWORD)
+      cy.fixture('users/user-1').then((user) => {
+        cy.get('input[name=userName]').type(user.userName)
+        cy.get('input[name=password]').type(user.password)
+        cy.get('input[name=userName]').should('contain.value', user.userName)
+        cy.get('input[name=password]').should('contain.value', user.password)
+      })
+      
       cy.get('input[name=password]').invoke('attr', 'type').should('eq', 'password')
-
       cy.get('input[type=submit]').should('contain.value', 'Submit')
     })
-
   })
 })
+
+export {}
