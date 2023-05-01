@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "userName": "randomUser2",
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane@doe.com",
+      "hashedPassword": "randomPassword",
+      "creationDate": "2023-04-05"
+    },
+    {
+      "userName": "randomUser",
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john@doe.com",
+      "hashedPassword": "randomPassword",
+      "creationDate": "2023-04-01"
+    }
+  ]
+}

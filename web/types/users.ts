@@ -19,10 +19,8 @@ export type LoginUser = {
   password: string
 }
 
-const _testUser: User = {
-  userName: 'test',
-  firstName: 'test',
-  lastName: 'test',
-  email: 'test',
-  randomValue: 'test'
+export type DataBaseUser = BaseUser & {
+  creationDate: string,
+  hashedPassword: string,
+  approved: boolean,
 }
